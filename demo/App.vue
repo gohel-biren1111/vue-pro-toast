@@ -342,19 +342,33 @@ function showPromiseDemo() {
   });
 
   promise(mockApiCall, {
-    loading: { message: 'Loading data...', title: 'API Call' },
-    success: (data) => ({ message: data, title: 'Success' }),
-    error: (error) => ({ message: error, title: 'Error' })
+    loading: { message: 'Loading data from API...', title: 'Promise Demo' },
+    success: (data) => ({ message: data, title: 'Success!' }),
+    error: (error) => ({ message: error, title: 'Failed!' })
+  }).then(() => {
+    console.log('Promise resolved');
+  }).catch(() => {
+    console.log('Promise rejected');
   });
 }
 
 function showSoundDemo() {
-  show({
-    message: 'This toast has sound effects! 🔊',
-    type: 'success',
-    title: 'Sound Demo',
-    duration: 3000
-  });
+  // Test different sound types
+  setTimeout(() => {
+    success('Success sound! 🎉', { title: 'Sound Demo' });
+  }, 0);
+  
+  setTimeout(() => {
+    error('Error sound! ❌', { title: 'Sound Demo' });
+  }, 500);
+  
+  setTimeout(() => {
+    warning('Warning sound! ⚠️', { title: 'Sound Demo' });
+  }, 1000);
+  
+  setTimeout(() => {
+    info('Info sound! ℹ️', { title: 'Sound Demo' });
+  }, 1500);
 }
 
 function showBatchDemo() {

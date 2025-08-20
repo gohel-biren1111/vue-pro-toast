@@ -81,6 +81,8 @@ const isDragging = ref(false);
 const dragOffset = ref(0);
 const progressWidth = ref(100);
 const progressInterval = ref<number>();
+const remainingTime = ref<number>();
+const pausedAt = ref<number>();
 
 // Computed properties
 const toastClasses = computed(() => {
@@ -156,14 +158,14 @@ function handleClose(): void {
 function handleMouseEnter(): void {
   if (props.toast.pauseOnHover) {
     pauseToast(props.toast.id);
-    stopProgressAnimation();
+    pauseProgressAnimation();
   }
 }
 
 function handleMouseLeave(): void {
   if (props.toast.pauseOnHover) {
     resumeToast(props.toast.id);
-    startProgressAnimation();
+    resumeProgressAnimation();
   }
 }
 
@@ -182,13 +184,43 @@ function startProgressAnimation(): void {
   
   const startTime = Date.now();
   const duration = props.toast.duration;
+  remainingTime.value = duration;
   
   progressInterval.value = window.setInterval(() => {
     const elapsed = Date.now() - startTime;
-    const remaining = Math.max(0, duration - elapsed);
-    progressWidth.value = (remaining / duration) * 100;
+    remainingTime.value = Math.max(0, duration - elapsed);
+    progressWidth.value = (remainingTime.value / duration) * 100;
     
-    if (remaining === 0) {
+    if (remainingTime.value === 0) {
+      stopProgressAnimation();
+    }
+  }, 16); // ~60fps
+}
+
+function pauseProgressAnimation(): void {
+  if (progressInterval.value) {
+    clearInterval(progressInterval.value);
+    progressInterval.value = undefined;
+    pausedAt.value = Date.now();
+  }
+}
+
+function resumeProgressAnimation(): void {
+  if (props.toast.duration <= 0 || !remainingTime.value) return;
+  
+  if (progressInterval.value) {
+    clearInterval(progressInterval.value);
+  }
+
+  const startTime = Date.now();
+  const duration = remainingTime.value; // Continue with remaining time
+  
+  progressInterval.value = window.setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    remainingTime.value = Math.max(0, duration - elapsed);
+    progressWidth.value = (remainingTime.value / props.toast.duration) * 100;
+    
+    if (remainingTime.value === 0) {
       stopProgressAnimation();
     }
   }, 16); // ~60fps

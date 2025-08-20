@@ -43,20 +43,24 @@ export class SoundManager {
   playSound(type: 'success' | 'error' | 'warning' | 'info'): void {
     if (!this.options.enabled) return;
 
-    const sounds = {
-      success: () => this.createBeep(800, 0.2),
-      error: () => {
-        this.createBeep(300, 0.1);
-        setTimeout(() => this.createBeep(250, 0.1), 100);
-      },
-      warning: () => {
-        this.createBeep(600, 0.15);
-        setTimeout(() => this.createBeep(600, 0.15), 200);
-      },
-      info: () => this.createBeep(500, 0.2)
-    };
+    try {
+      const sounds = {
+        success: () => this.createBeep(800, 0.2),
+        error: () => {
+          this.createBeep(300, 0.1);
+          setTimeout(() => this.createBeep(250, 0.1), 100);
+        },
+        warning: () => {
+          this.createBeep(600, 0.15);
+          setTimeout(() => this.createBeep(600, 0.15), 200);
+        },
+        info: () => this.createBeep(500, 0.2)
+      };
 
-    sounds[type]?.();
+      sounds[type]?.();
+    } catch (error) {
+      console.log('Sound playback not available');
+    }
   }
 
   setVolume(volume: number): void {
