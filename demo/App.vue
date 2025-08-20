@@ -4,7 +4,25 @@
     
     <div class="demo-container">
       <h1 class="demo-title">🍞 Vue Pro Toast</h1>
-      <p class="demo-subtitle">Advanced toast notifications for Vue 3</p>
+      <p class="demo-subtitle">Professional Toast Notifications for Vue 3 - The Most Advanced Package</p>
+      <div class="demo-stats">
+        <div class="stat">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Features</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">7</span>
+          <span class="stat-label">Animations</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">7</span>
+          <span class="stat-label">Positions</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">TypeScript</span>
+        </div>
+      </div>
       
       <!-- Toast Type Examples -->
       <div class="demo-section">
@@ -48,7 +66,7 @@
 
       <!-- Feature Examples -->
       <div class="demo-section">
-        <h2>Features</h2>
+        <h2>Advanced Features</h2>
         <div class="demo-buttons">
           <button @click="showWithTitle" class="btn">With Title</button>
           <button @click="showPersistent" class="btn">Persistent</button>
@@ -56,6 +74,10 @@
           <button @click="showSwipeable" class="btn">Swipeable</button>
           <button @click="showNonClosable" class="btn">Non-closable</button>
           <button @click="showCustomStyle" class="btn">Custom Style</button>
+          <button @click="showClickAction" class="btn">Click Action</button>
+          <button @click="showHTMLContent" class="btn">HTML Content</button>
+          <button @click="showProgressToast" class="btn">Progress Toast</button>
+          <button @click="showStacked" class="btn">Stack Multiple</button>
         </div>
       </div>
 
@@ -224,6 +246,70 @@ function showCustomStyle() {
   });
 }
 
+// New advanced features
+function showClickAction() {
+  show({
+    message: 'Click me to perform an action!',
+    type: 'info',
+    title: 'Interactive Toast',
+    duration: 8000,
+    onClick: () => {
+      alert('Toast clicked! You can perform any action here.');
+    }
+  });
+}
+
+function showHTMLContent() {
+  show({
+    message: 'This toast supports <strong>HTML content</strong> and <em>formatting</em>!',
+    type: 'info',
+    title: 'Rich Content',
+    duration: 6000,
+    icon: {
+      html: '🎨'
+    }
+  });
+}
+
+function showProgressToast() {
+  const toastId = show({
+    message: 'Upload in progress...',
+    type: 'info',
+    title: 'File Upload',
+    duration: 5000
+  });
+  
+  // Simulate progress updates
+  setTimeout(() => {
+    update(toastId, {
+      message: 'Upload 50% complete...',
+      type: 'warning'
+    });
+  }, 1500);
+  
+  setTimeout(() => {
+    update(toastId, {
+      message: 'Upload completed successfully!',
+      type: 'success',
+      icon: { html: '🎉' }
+    });
+  }, 3000);
+}
+
+function showStacked() {
+  // Show multiple toasts quickly to demonstrate stacking
+  success('First notification', { title: 'Stack Demo 1' });
+  setTimeout(() => warning('Second notification', { title: 'Stack Demo 2' }), 200);
+  setTimeout(() => error('Third notification', { title: 'Stack Demo 3' }), 400);
+  setTimeout(() => info('Fourth notification', { title: 'Stack Demo 4' }), 600);
+  setTimeout(() => show({
+    message: 'Fifth notification with custom icon',
+    title: 'Stack Demo 5',
+    type: 'default',
+    icon: { html: '🚀' }
+  }), 800);
+}
+
 // Control examples
 let updateToastId: string | null = null;
 
@@ -386,6 +472,50 @@ function showUpdateExample() {
   }
   50% {
     transform: scale(1.05);
+  }
+}
+
+.demo-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0 40px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: #666;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .demo-stats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .stat {
+    flex: 1;
+    min-width: 80px;
   }
 }
 </style>

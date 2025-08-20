@@ -12,11 +12,19 @@
   --vue-toast-border-dark: #374151;
   --vue-toast-shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
   
-  /* Toast types */
-  --vue-toast-success: #10b981;
-  --vue-toast-error: #ef4444;
-  --vue-toast-warning: #f59e0b;
-  --vue-toast-info: #3b82f6;
+  /* Toast types - Enhanced Colors */
+  --vue-toast-success: #16a34a;
+  --vue-toast-success-bg: #dcfce7;
+  --vue-toast-success-border: #bbf7d0;
+  --vue-toast-error: #dc2626;
+  --vue-toast-error-bg: #fef2f2;
+  --vue-toast-error-border: #fecaca;
+  --vue-toast-warning: #ea580c;
+  --vue-toast-warning-bg: #fff7ed;
+  --vue-toast-warning-border: #fed7aa;
+  --vue-toast-info: #2563eb;
+  --vue-toast-info-bg: #eff6ff;
+  --vue-toast-info-border: #dbeafe;
   --vue-toast-default: #6b7280;
   
   /* Spacing */
@@ -93,21 +101,33 @@
   }
 }
 
-/* Toast type styles */
+/* Toast type styles with enhanced colors */
 .vue-toast--success {
   border-left: 4px solid var(--vue-toast-success);
+  background: var(--vue-toast-success-bg);
+  border-color: var(--vue-toast-success-border);
+  color: #166534;
 }
 
 .vue-toast--error {
   border-left: 4px solid var(--vue-toast-error);
+  background: var(--vue-toast-error-bg);
+  border-color: var(--vue-toast-error-border);
+  color: #991b1b;
 }
 
 .vue-toast--warning {
   border-left: 4px solid var(--vue-toast-warning);
+  background: var(--vue-toast-warning-bg);
+  border-color: var(--vue-toast-warning-border);
+  color: #9a3412;
 }
 
 .vue-toast--info {
   border-left: 4px solid var(--vue-toast-info);
+  background: var(--vue-toast-info-bg);
+  border-color: var(--vue-toast-info-border);
+  color: #1e40af;
 }
 
 .vue-toast--default {
@@ -137,27 +157,57 @@
   color: var(--vue-toast-success);
   font-weight: bold;
   font-size: 16px;
+  background: var(--vue-toast-success);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
 .vue-toast__icon--error::before {
   content: "✕";
-  color: var(--vue-toast-error);
+  background: var(--vue-toast-error);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
   font-weight: bold;
-  font-size: 16px;
 }
 
 .vue-toast__icon--warning::before {
-  content: "⚠";
-  color: var(--vue-toast-warning);
+  content: "!";
+  background: var(--vue-toast-warning);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
   font-weight: bold;
-  font-size: 16px;
 }
 
 .vue-toast__icon--info::before {
-  content: "ℹ";
-  color: var(--vue-toast-info);
+  content: "i";
+  background: var(--vue-toast-info);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
   font-weight: bold;
-  font-size: 16px;
 }
 
 .vue-toast__icon--default::before {
@@ -391,5 +441,4 @@
   opacity: 0;
 }
 
-/* Animation imports */
-@import url('./animations.css');
+/* Enhanced professional styling for Vue Pro Toast */
