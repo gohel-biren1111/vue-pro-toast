@@ -72,66 +72,173 @@
 
 /* Theme styles */
 .vue-toast--light {
-  background: var(--vue-toast-bg-light);
-  color: var(--vue-toast-text-light);
-  border: 1px solid var(--vue-toast-border-light);
-  box-shadow: var(--vue-toast-shadow-light);
+  background: var(--vue-toast-bg-light) !important;
+  color: var(--vue-toast-text-light) !important;
+  border: 1px solid var(--vue-toast-border-light) !important;
+  box-shadow: var(--vue-toast-shadow-light) !important;
 }
 
 .vue-toast--dark {
-  background: var(--vue-toast-bg-dark);
-  color: var(--vue-toast-text-dark);
-  border: 1px solid var(--vue-toast-border-dark);
-  box-shadow: var(--vue-toast-shadow-dark);
+  background: var(--vue-toast-bg-dark) !important;
+  color: var(--vue-toast-text-dark) !important;
+  border: 1px solid var(--vue-toast-border-dark) !important;
+  box-shadow: var(--vue-toast-shadow-dark) !important;
 }
 
 .vue-toast--auto {
-  background: var(--vue-toast-bg-light);
-  color: var(--vue-toast-text-light);
-  border: 1px solid var(--vue-toast-border-light);
-  box-shadow: var(--vue-toast-shadow-light);
+  background: var(--vue-toast-bg-light) !important;
+  color: var(--vue-toast-text-light) !important;
+  border: 1px solid var(--vue-toast-border-light) !important;
+  box-shadow: var(--vue-toast-shadow-light) !important;
 }
 
 @media (prefers-color-scheme: dark) {
   .vue-toast--auto {
-    background: var(--vue-toast-bg-dark);
-    color: var(--vue-toast-text-dark);
-    border: 1px solid var(--vue-toast-border-dark);
-    box-shadow: var(--vue-toast-shadow-dark);
+    background: var(--vue-toast-bg-dark) !important;
+    color: var(--vue-toast-text-dark) !important;
+    border: 1px solid var(--vue-toast-border-dark) !important;
+    box-shadow: var(--vue-toast-shadow-dark) !important;
   }
 }
 
 /* Toast type styles with enhanced colors */
-.vue-toast--success {
-  border-left: 4px solid var(--vue-toast-success);
-  background: var(--vue-toast-success-bg);
-  border-color: var(--vue-toast-success-border);
-  color: #166534;
+.vue-toast--success.vue-toast--light {
+  background: var(--vue-toast-success-bg) !important;
+  border-color: var(--vue-toast-success-border) !important;
+  color: #166534 !important;
+  border-left: 4px solid var(--vue-toast-success) !important;
 }
 
-.vue-toast--error {
-  border-left: 4px solid var(--vue-toast-error);
-  background: var(--vue-toast-error-bg);
-  border-color: var(--vue-toast-error-border);
-  color: #991b1b;
+.vue-toast--success.vue-toast--dark {
+  background: #1e293b !important;
+  border-color: var(--vue-toast-success) !important;
+  color: #4ade80 !important;
+  border-left: 4px solid var(--vue-toast-success) !important;
 }
 
-.vue-toast--warning {
-  border-left: 4px solid var(--vue-toast-warning);
-  background: var(--vue-toast-warning-bg);
-  border-color: var(--vue-toast-warning-border);
-  color: #9a3412;
+.vue-toast--error.vue-toast--light {
+  background: var(--vue-toast-error-bg) !important;
+  border-color: var(--vue-toast-error-border) !important;
+  color: #991b1b !important;
+  border-left: 4px solid var(--vue-toast-error) !important;
 }
 
-.vue-toast--info {
-  border-left: 4px solid var(--vue-toast-info);
-  background: var(--vue-toast-info-bg);
-  border-color: var(--vue-toast-info-border);
-  color: #1e40af;
+.vue-toast--error.vue-toast--dark {
+  background: #1e293b !important;
+  border-color: var(--vue-toast-error) !important;
+  color: #f87171 !important;
+  border-left: 4px solid var(--vue-toast-error) !important;
 }
 
-.vue-toast--default {
-  border-left: 4px solid var(--vue-toast-default);
+.vue-toast--warning.vue-toast--light {
+  background: var(--vue-toast-warning-bg) !important;
+  border-color: var(--vue-toast-warning-border) !important;
+  color: #9a3412 !important;
+  border-left: 4px solid var(--vue-toast-warning) !important;
+}
+
+.vue-toast--warning.vue-toast--dark {
+  background: #1e293b !important;
+  border-color: var(--vue-toast-warning) !important;
+  color: #fb923c !important;
+  border-left: 4px solid var(--vue-toast-warning) !important;
+}
+
+.vue-toast--info.vue-toast--light {
+  background: var(--vue-toast-info-bg) !important;
+  border-color: var(--vue-toast-info-border) !important;
+  color: #1e40af !important;
+  border-left: 4px solid var(--vue-toast-info) !important;
+}
+
+.vue-toast--info.vue-toast--dark {
+  background: #1e293b !important;
+  border-color: var(--vue-toast-info) !important;
+  color: #60a5fa !important;
+  border-left: 4px solid var(--vue-toast-info) !important;
+}
+
+.vue-toast--default.vue-toast--light {
+  background: var(--vue-toast-bg-light) !important;
+  border-left: 4px solid var(--vue-toast-default) !important;
+  color: var(--vue-toast-text-light) !important;
+}
+
+.vue-toast--default.vue-toast--dark {
+  background: var(--vue-toast-bg-dark) !important;
+  border-left: 4px solid var(--vue-toast-default) !important;
+  color: var(--vue-toast-text-dark) !important;
+}
+
+/* Auto theme support */
+@media (prefers-color-scheme: dark) {
+  .vue-toast--success.vue-toast--auto {
+    background: #1e293b !important;
+    border-color: var(--vue-toast-success) !important;
+    color: #4ade80 !important;
+    border-left: 4px solid var(--vue-toast-success) !important;
+  }
+
+  .vue-toast--error.vue-toast--auto {
+    background: #1e293b !important;
+    border-color: var(--vue-toast-error) !important;
+    color: #f87171 !important;
+    border-left: 4px solid var(--vue-toast-error) !important;
+  }
+
+  .vue-toast--warning.vue-toast--auto {
+    background: #1e293b !important;
+    border-color: var(--vue-toast-warning) !important;
+    color: #fb923c !important;
+    border-left: 4px solid var(--vue-toast-warning) !important;
+  }
+
+  .vue-toast--info.vue-toast--auto {
+    background: #1e293b !important;
+    border-color: var(--vue-toast-info) !important;
+    color: #60a5fa !important;
+    border-left: 4px solid var(--vue-toast-info) !important;
+  }
+
+  .vue-toast--default.vue-toast--auto {
+    background: var(--vue-toast-bg-dark) !important;
+    border-left: 4px solid var(--vue-toast-default) !important;
+    color: var(--vue-toast-text-dark) !important;
+  }
+}
+
+.vue-toast--success.vue-toast--auto {
+  background: var(--vue-toast-success-bg) !important;
+  border-color: var(--vue-toast-success-border) !important;
+  color: #166534 !important;
+  border-left: 4px solid var(--vue-toast-success) !important;
+}
+
+.vue-toast--error.vue-toast--auto {
+  background: var(--vue-toast-error-bg) !important;
+  border-color: var(--vue-toast-error-border) !important;
+  color: #991b1b !important;
+  border-left: 4px solid var(--vue-toast-error) !important;
+}
+
+.vue-toast--warning.vue-toast--auto {
+  background: var(--vue-toast-warning-bg) !important;
+  border-color: var(--vue-toast-warning-border) !important;
+  color: #9a3412 !important;
+  border-left: 4px solid var(--vue-toast-warning) !important;
+}
+
+.vue-toast--info.vue-toast--auto {
+  background: var(--vue-toast-info-bg) !important;
+  border-color: var(--vue-toast-info-border) !important;
+  color: #1e40af !important;
+  border-left: 4px solid var(--vue-toast-info) !important;
+}
+
+.vue-toast--default.vue-toast--auto {
+  background: var(--vue-toast-bg-light) !important;
+  border-left: 4px solid var(--vue-toast-default) !important;
+  color: var(--vue-toast-text-light) !important;
 }
 
 /* Icon styles */
