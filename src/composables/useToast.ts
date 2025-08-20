@@ -7,6 +7,18 @@ import type {
   UseToastReturn,
   ToastContainerOptions 
 } from '../types';
+import { SoundManager } from '../plugins/sound';
+import { KeyboardManager } from '../plugins/keyboard';
+import { AnalyticsManager } from '../plugins/analytics';
+import { QueueManager } from '../plugins/queue';
+import { PromiseManager, type ToastPromise } from '../plugins/promise';
+
+// Plugin instances
+const soundManager = new SoundManager();
+const keyboardManager = new KeyboardManager();
+const analyticsManager = new AnalyticsManager();
+const queueManager = new QueueManager();
+const promiseManager = new PromiseManager();
 
 // Global state
 const state = reactive<ToastState>({
@@ -22,6 +34,9 @@ const state = reactive<ToastState>({
     zIndex: 9999
   }
 });
+
+// Setup keyboard handlers
+keyboardManager.setDismissAllHandler(() => dismissAll());
 
 // Default toast options
 const defaultToastOptions: Partial<ToastOptions> = {
@@ -122,6 +137,14 @@ function setAutoClose(toast: Toast): void {
 function show(options: ToastOptions): string {
   const toast = createToast(options);
   
+  // Play sound
+  if (toast.type !== 'default') {
+    soundManager.playSound(toast.type);
+  }
+  
+  // Track analytics
+  analyticsManager.trackEvent(toast.id, toast.type, 'show');
+  
   addToContainer(toast);
   setAutoClose(toast);
   
@@ -134,8 +157,11 @@ function show(options: ToastOptions): string {
 
 function dismiss(id: string): void {
   const toast = state.toasts.find(t => t.id === id);
-  if (toast?.onClose) {
-    toast.onClose();
+  if (toast) {
+    analyticsManager.trackEvent(toast.id, toast.type, 'dismiss');
+    if (toast.onClose) {
+      toast.onClose();
+    }
   }
   removeFromContainer(id);
 }
@@ -216,6 +242,39 @@ function setDefaults(options: Partial<ToastContainerOptions>): void {
   Object.assign(state.defaultOptions, options);
 }
 
+// Advanced promise-based toast
+function promise<T>(
+  promise: Promise<T>,
+  options: ToastPromise<T>
+): Promise<T> {
+  return promiseManager.handlePromise(promise, options, show, update);
+}
+
+// Batch operations
+function batch(operations: (() => string)[]): string[] {
+  return operations.map(op => op());
+}
+
+// Queue operations
+function enqueue(options: ToastOptions, priority = 0): boolean {
+  return queueManager.enqueue({
+    id: options.id || generateId(),
+    priority,
+    data: options
+  });
+}
+
+// Plugin access
+function getPlugins() {
+  return {
+    sound: soundManager,
+    keyboard: keyboardManager,
+    analytics: analyticsManager,
+    queue: queueManager,
+    promise: promiseManager
+  };
+}
+
 export function useToast(): UseToastReturn {
   return {
     show,
@@ -227,6 +286,10 @@ export function useToast(): UseToastReturn {
     dismissAll,
     clear,
     update,
+    promise,
+    batch,
+    enqueue,
+    plugins: getPlugins(),
     toasts: computed(() => state.toasts)
   };
 }

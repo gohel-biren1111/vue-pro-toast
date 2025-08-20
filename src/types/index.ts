@@ -85,5 +85,15 @@ export interface UseToastReturn {
   dismissAll: (position?: ToastPosition) => void;
   clear: () => void;
   update: (id: string, options: Partial<ToastOptions>) => void;
+  promise: <T>(promise: Promise<T>, options: any) => Promise<T>;
+  batch: (operations: (() => string)[]) => string[];
+  enqueue: (options: ToastOptions, priority?: number) => boolean;
+  plugins: {
+    sound: any;
+    keyboard: any;
+    analytics: any;
+    queue: any;
+    promise: any;
+  };
   toasts: Readonly<Ref<Toast[]>>;
 }

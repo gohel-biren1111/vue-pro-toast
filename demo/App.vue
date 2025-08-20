@@ -7,16 +7,24 @@
       <p class="demo-subtitle">Professional Toast Notifications for Vue 3 - The Most Advanced Package</p>
       <div class="demo-stats">
         <div class="stat">
-          <span class="stat-number">15+</span>
-          <span class="stat-label">Features</span>
+          <span class="stat-number">25+</span>
+          <span class="stat-label">Advanced Features</span>
         </div>
         <div class="stat">
-          <span class="stat-number">7</span>
-          <span class="stat-label">Animations</span>
+          <span class="stat-number">🔊</span>
+          <span class="stat-label">Sound Effects</span>
         </div>
         <div class="stat">
-          <span class="stat-number">7</span>
-          <span class="stat-label">Positions</span>
+          <span class="stat-number">⌨️</span>
+          <span class="stat-label">Keyboard Support</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">📊</span>
+          <span class="stat-label">Analytics Built-in</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">🎯</span>
+          <span class="stat-label">Promise Integration</span>
         </div>
         <div class="stat">
           <span class="stat-number">100%</span>
@@ -78,6 +86,21 @@
           <button @click="showHTMLContent" class="btn">HTML Content</button>
           <button @click="showProgressToast" class="btn">Progress Toast</button>
           <button @click="showStacked" class="btn">Stack Multiple</button>
+          <button @click="showPromiseDemo" class="btn">Promise Demo</button>
+          <button @click="showSoundDemo" class="btn">Sound Demo</button>
+          <button @click="showBatchDemo" class="btn">Batch Demo</button>
+          <button @click="showAnalytics" class="btn">Show Analytics</button>
+        </div>
+      </div>
+      
+      <!-- Super Advanced Features -->
+      <div class="demo-section">
+        <h2>🚀 Unique Features (No Other Package Has These!)</h2>
+        <div class="demo-buttons">
+          <button @click="toggleSound" class="btn">Toggle Sound Effects</button>
+          <button @click="showKeyboardHelp" class="btn">Keyboard Shortcuts</button>
+          <button @click="showQueueDemo" class="btn">Queue Management</button>
+          <button @click="exportAnalytics" class="btn">Export Analytics</button>
         </div>
       </div>
 
@@ -114,7 +137,7 @@ import { useToast } from '../src/composables/useToast';
 import ToastContainer from '../src/components/ToastContainer.vue';
 import type { ToastPosition, ToastAnimation, ToastTheme } from '../src/types';
 
-const { show, success, error, warning, info, dismiss, dismissAll, clear, update, toasts } = useToast();
+const { show, success, error, warning, info, dismiss, dismissAll, clear, update, promise, batch, plugins, toasts } = useToast();
 
 // Basic toast types
 function showSuccess() {
@@ -308,6 +331,99 @@ function showStacked() {
     type: 'default',
     icon: { html: '🚀' }
   }), 800);
+}
+
+// Super Advanced Features
+function showPromiseDemo() {
+  const mockApiCall = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      Math.random() > 0.3 ? resolve('Data loaded successfully!') : reject('Network error occurred');
+    }, 3000);
+  });
+
+  promise(mockApiCall, {
+    loading: { message: 'Loading data...', title: 'API Call' },
+    success: (data) => ({ message: data, title: 'Success' }),
+    error: (error) => ({ message: error, title: 'Error' })
+  });
+}
+
+function showSoundDemo() {
+  show({
+    message: 'This toast has sound effects! 🔊',
+    type: 'success',
+    title: 'Sound Demo',
+    duration: 3000
+  });
+}
+
+function showBatchDemo() {
+  batch([
+    () => success('Batch operation 1'),
+    () => warning('Batch operation 2'),
+    () => info('Batch operation 3'),
+    () => error('Batch operation 4')
+  ]);
+}
+
+function showAnalytics() {
+  const stats = plugins.analytics.getStats();
+  show({
+    message: `Total events: ${stats.totalEvents}, Avg duration: ${Math.round(stats.averageDuration)}ms`,
+    title: 'Analytics Report',
+    type: 'info',
+    duration: 8000
+  });
+}
+
+function toggleSound() {
+  plugins.sound.toggle();
+  show({
+    message: 'Sound effects toggled!',
+    type: 'info',
+    duration: 2000
+  });
+}
+
+function showKeyboardHelp() {
+  show({
+    message: 'Press ESC to dismiss all toasts, Arrow keys to navigate',
+    title: 'Keyboard Shortcuts',
+    type: 'info',
+    duration: 6000,
+    icon: { html: '⌨️' }
+  });
+}
+
+function showQueueDemo() {
+  // Add multiple toasts to queue
+  for (let i = 1; i <= 5; i++) {
+    plugins.queue.enqueue({
+      id: `queue-${i}`,
+      priority: i,
+      data: {
+        message: `Queued toast #${i}`,
+        type: 'info',
+        title: 'Queue Demo'
+      }
+    });
+  }
+  
+  show({
+    message: `${plugins.queue.size()} toasts added to queue!`,
+    type: 'success',
+    duration: 3000
+  });
+}
+
+function exportAnalytics() {
+  const data = plugins.analytics.exportData();
+  console.log('Analytics Data:', data);
+  show({
+    message: `Analytics exported! Check console (${data.length} events)`,
+    type: 'success',
+    duration: 4000
+  });
 }
 
 // Control examples
