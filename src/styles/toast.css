@@ -1,0 +1,395 @@
+/* CSS Variables for theming */
+:root {
+  /* Light theme */
+  --vue-toast-bg-light: #ffffff;
+  --vue-toast-text-light: #374151;
+  --vue-toast-border-light: #e5e7eb;
+  --vue-toast-shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Dark theme */
+  --vue-toast-bg-dark: #1f2937;
+  --vue-toast-text-dark: #f9fafb;
+  --vue-toast-border-dark: #374151;
+  --vue-toast-shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  
+  /* Toast types */
+  --vue-toast-success: #10b981;
+  --vue-toast-error: #ef4444;
+  --vue-toast-warning: #f59e0b;
+  --vue-toast-info: #3b82f6;
+  --vue-toast-default: #6b7280;
+  
+  /* Spacing */
+  --vue-toast-padding: 16px;
+  --vue-toast-radius: 8px;
+  --vue-toast-gap: 8px;
+  
+  /* Typography */
+  --vue-toast-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --vue-toast-font-size: 14px;
+  --vue-toast-font-weight: 400;
+  --vue-toast-title-font-weight: 600;
+  --vue-toast-line-height: 1.4;
+}
+
+/* Base toast styles */
+.vue-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: var(--vue-toast-padding);
+  border-radius: var(--vue-toast-radius);
+  font-family: var(--vue-toast-font-family);
+  font-size: var(--vue-toast-font-size);
+  font-weight: var(--vue-toast-font-weight);
+  line-height: var(--vue-toast-line-height);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-width: 300px;
+  max-width: 500px;
+  word-wrap: break-word;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.vue-toast:hover {
+  transform: translateY(-2px);
+}
+
+.vue-toast--dragging {
+  transition: opacity 0.2s ease;
+  cursor: grabbing;
+}
+
+/* Theme styles */
+.vue-toast--light {
+  background: var(--vue-toast-bg-light);
+  color: var(--vue-toast-text-light);
+  border: 1px solid var(--vue-toast-border-light);
+  box-shadow: var(--vue-toast-shadow-light);
+}
+
+.vue-toast--dark {
+  background: var(--vue-toast-bg-dark);
+  color: var(--vue-toast-text-dark);
+  border: 1px solid var(--vue-toast-border-dark);
+  box-shadow: var(--vue-toast-shadow-dark);
+}
+
+.vue-toast--auto {
+  background: var(--vue-toast-bg-light);
+  color: var(--vue-toast-text-light);
+  border: 1px solid var(--vue-toast-border-light);
+  box-shadow: var(--vue-toast-shadow-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  .vue-toast--auto {
+    background: var(--vue-toast-bg-dark);
+    color: var(--vue-toast-text-dark);
+    border: 1px solid var(--vue-toast-border-dark);
+    box-shadow: var(--vue-toast-shadow-dark);
+  }
+}
+
+/* Toast type styles */
+.vue-toast--success {
+  border-left: 4px solid var(--vue-toast-success);
+}
+
+.vue-toast--error {
+  border-left: 4px solid var(--vue-toast-error);
+}
+
+.vue-toast--warning {
+  border-left: 4px solid var(--vue-toast-warning);
+}
+
+.vue-toast--info {
+  border-left: 4px solid var(--vue-toast-info);
+}
+
+.vue-toast--default {
+  border-left: 4px solid var(--vue-toast-default);
+}
+
+/* Icon styles */
+.vue-toast__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.vue-toast__icon--default {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.vue-toast__icon--success::before {
+  content: "✓";
+  color: var(--vue-toast-success);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.vue-toast__icon--error::before {
+  content: "✕";
+  color: var(--vue-toast-error);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.vue-toast__icon--warning::before {
+  content: "⚠";
+  color: var(--vue-toast-warning);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.vue-toast__icon--info::before {
+  content: "ℹ";
+  color: var(--vue-toast-info);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.vue-toast__icon--default::before {
+  content: "●";
+  color: var(--vue-toast-default);
+  font-size: 12px;
+}
+
+/* Content styles */
+.vue-toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.vue-toast__title {
+  font-weight: var(--vue-toast-title-font-weight);
+  margin-bottom: 4px;
+  color: inherit;
+}
+
+.vue-toast__message {
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Close button styles */
+.vue-toast__close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin: -4px -4px -4px 8px;
+  border-radius: 4px;
+  color: inherit;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vue-toast__close:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.vue-toast--dark .vue-toast__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Progress bar styles */
+.vue-toast__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--vue-toast-success) 0%,
+    var(--vue-toast-info) 50%,
+    var(--vue-toast-warning) 100%
+  );
+  transition: width 0.1s linear;
+  border-radius: 0 0 var(--vue-toast-radius) var(--vue-toast-radius);
+}
+
+.vue-toast--success .vue-toast__progress {
+  background: var(--vue-toast-success);
+}
+
+.vue-toast--error .vue-toast__progress {
+  background: var(--vue-toast-error);
+}
+
+.vue-toast--warning .vue-toast__progress {
+  background: var(--vue-toast-warning);
+}
+
+.vue-toast--info .vue-toast__progress {
+  background: var(--vue-toast-info);
+}
+
+/* Container styles */
+.vue-toast-container {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--toast-gap, 8px);
+}
+
+.vue-toast-container__list {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+}
+
+.vue-toast-container .vue-toast {
+  pointer-events: auto;
+}
+
+/* Position-specific styles */
+.vue-toast-container--top-right {
+  top: 16px;
+  right: 16px;
+}
+
+.vue-toast-container--top-left {
+  top: 16px;
+  left: 16px;
+}
+
+.vue-toast-container--top-center {
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.vue-toast-container--bottom-right {
+  bottom: 16px;
+  right: 16px;
+  flex-direction: column-reverse;
+}
+
+.vue-toast-container--bottom-left {
+  bottom: 16px;
+  left: 16px;
+  flex-direction: column-reverse;
+}
+
+.vue-toast-container--bottom-center {
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column-reverse;
+}
+
+.vue-toast-container--center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .vue-toast-container {
+    left: 8px !important;
+    right: 8px !important;
+    transform: none !important;
+  }
+
+  .vue-toast-container--top-center,
+  .vue-toast-container--bottom-center {
+    left: 8px !important;
+    right: 8px !important;
+    transform: none !important;
+  }
+
+  .vue-toast {
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* List transition styles */
+.vue-toast-list-top-right-enter-active,
+.vue-toast-list-top-right-leave-active,
+.vue-toast-list-top-left-enter-active,
+.vue-toast-list-top-left-leave-active,
+.vue-toast-list-top-center-enter-active,
+.vue-toast-list-top-center-leave-active {
+  transition: all 0.3s ease;
+}
+
+.vue-toast-list-top-right-enter-from,
+.vue-toast-list-top-left-enter-from,
+.vue-toast-list-top-center-enter-from {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.vue-toast-list-top-right-leave-to,
+.vue-toast-list-top-left-leave-to,
+.vue-toast-list-top-center-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.vue-toast-list-bottom-right-enter-active,
+.vue-toast-list-bottom-right-leave-active,
+.vue-toast-list-bottom-left-enter-active,
+.vue-toast-list-bottom-left-leave-active,
+.vue-toast-list-bottom-center-enter-active,
+.vue-toast-list-bottom-center-leave-active {
+  transition: all 0.3s ease;
+}
+
+.vue-toast-list-bottom-right-enter-from,
+.vue-toast-list-bottom-left-enter-from,
+.vue-toast-list-bottom-center-enter-from {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.vue-toast-list-bottom-right-leave-to,
+.vue-toast-list-bottom-left-leave-to,
+.vue-toast-list-bottom-center-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.vue-toast-list-center-enter-active,
+.vue-toast-list-center-leave-active {
+  transition: all 0.3s ease;
+}
+
+.vue-toast-list-center-enter-from,
+.vue-toast-list-center-leave-to {
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+/* Animation imports */
+@import url('./animations.css');
