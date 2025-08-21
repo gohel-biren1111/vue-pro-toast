@@ -2,7 +2,8 @@
   🎁 <b>Vue Pro Toast</b> 
   <sup><img src="https://raw.githubusercontent.com/gohel-biren1111/vue-pro-toast/main/assets/kingpro.svg" alt="King Pro" width="28" height="28"></sup>
 </h1>
-**The Most Basic to Advanced Vue.js Toast Notification Library** - Built for modern applications with unique features no other package offers!
+
+**The Most Basic to Advanced Vue.js Toast Notification Library** - Built for modern applications with unique features no other package offers!\*
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue) ![Vue 3](https://img.shields.io/badge/Vue-3.x-green)
 
