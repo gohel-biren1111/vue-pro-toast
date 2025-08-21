@@ -1,4 +1,7 @@
-# 🎁 Vue Pro Toast
+<h1 align="left">
+  🎁 Vue Pro Toast
+  <img src="./kingpro.svg" alt="King Pro" width="22" height="22" style="vertical-align: -2px; margin-left:6px;  fill:gold; color:gold;" />
+</h1>
 
 **The Most Basic to Advanced Vue.js Toast Notification Library** - Built for modern applications with unique features no other package offers!
 
@@ -23,6 +26,8 @@
     </tr>
   </table>
 </p>
+
+---
 
 ## ✨ Why Vue Pro Toast?
 
@@ -511,7 +516,7 @@ git push origin feature/amazing-feature
 
 **Under MIT License**
 
-Copyright (c) 2025 Vue Pro Toast
+Copyright (c) 2025 **Vue Pro Toast**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
