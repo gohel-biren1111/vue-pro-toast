@@ -1,6 +1,5 @@
-<h1 align="left">
-  🎁 Vue Pro Toast
-  <img src="./kingpro.svg" alt="King Pro" width="22" height="22" style="vertical-align: -2px; margin-left:6px;  fill:gold; color:gold;" />
+ <h1 align="left">
+# 🎁 Vue Pro Toast <sup><img src="./kingpro.svg" alt="King Pro" width="16" height="16"></sup>
 </h1>
 
 **The Most Basic to Advanced Vue.js Toast Notification Library** - Built for modern applications with unique features no other package offers!
