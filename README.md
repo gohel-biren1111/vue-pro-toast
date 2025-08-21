@@ -4,6 +4,13 @@
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue) ![Vue 3](https://img.shields.io/badge/Vue-3.x-green)
 
+<!-- <p align="center">
+  <img src="./Demo.png" alt="Vue Pro Toast" width="800"  />
+</p>
+<p align="center">
+  <img src="./vueProToast.png" alt="Vue Pro Toast" width="800" />
+</p> -->
+
 ## ✨ Why Vue Pro Toast?
 
 🔊 **Sound Effects** - First toast library with built-in audio feedback  
@@ -16,13 +23,9 @@
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Demo & Documentation
 
 <!-- - 🚀 **[Demo](https://pro-toast-demo-uo7a.vercel.app/)** -->
-
-- **Coming Soon...**
-
-## 🚀 Documentation
 
 - **Coming Soon...**
 
@@ -445,7 +448,7 @@ We welcome contributions! Please follow these steps:
 ### 1. Fork & Clone
 
 ```bash
-git clone https://github.com/your-username/vue-pro-toast.git
+git clone https://github.com/gohel-biren1111/vue-pro-toast.git
 cd vue-pro-toast
 ```
 

@@ -193,20 +193,21 @@ function showSuccess() {
 function showError() {
   error("Something went wrong. Please try again.", {
     title: "Error",
-    duration: 6000,
+    duration: 10000,
   });
 }
 
 function showWarning() {
   warning("This action cannot be undone.", {
     title: "Warning",
-    duration: 5000,
+    duration: 10000,
   });
 }
 
 function showInfo() {
   info("New update is available!", {
     title: "Information",
+    duration: 10000,
   });
 }
 
@@ -214,6 +215,7 @@ function showDefault() {
   show({
     message: "This is a default toast notification.",
     type: "default",
+    duration: 10000,
   });
 }
 
