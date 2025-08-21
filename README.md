@@ -23,6 +23,18 @@
     </tr>
   </table>
 </p>
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="50%">
+        <img src="./uploading.png" alt="Vue Pro Toast Sound Effects" width="100%" />
+      </td>
+      <td align="center" width="50%">
+        <img src="./sounds.png" alt="Vue Pro Toast Features" width="100%" />
+      </td>
+    </tr>
+  </table>
+</p>
 
 ## ✨ Why Vue Pro Toast?
 
