@@ -1,31 +1,40 @@
 {
   "name": "vue-pro-toast",
   "version": "1.0.0",
-  "type": "module",
   "description": "A feature-complete Vue 3 toast notification package with basic to advanced features, TypeScript support, and modern design.",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests yet\""
   },
   "keywords": [
     "vue",
     "toast",
     "notifications",
     "vite",
-    "typescript"
+    "typescript",
+    "vue3",
+    "plugin",
+    "ui"
   ],
-  "author": "",
+  "author": "Biren Gohel",
   "license": "MIT",
-  "dependencies": {
-    "vue": "^3.5.18",
-    "@vitejs/plugin-vue": "^6.0.1"
+  "peerDependencies": {
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "vite": "^6.3.5",
     "typescript": "^5.9.2",
     "eslint": "^9.33.0",
+    "@vitejs/plugin-vue": "^6.0.1",
     "@typescript-eslint/eslint-plugin": "^8.40.0",
     "@typescript-eslint/parser": "^8.40.0",
     "@vue/eslint-config-typescript": "^14.6.0",
