@@ -4,14 +4,16 @@
   --vue-toast-bg-light: #ffffff;
   --vue-toast-text-light: #374151;
   --vue-toast-border-light: #e5e7eb;
-  --vue-toast-shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  
+  --vue-toast-shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
   /* Dark theme */
   --vue-toast-bg-dark: #1f2937;
   --vue-toast-text-dark: #f9fafb;
   --vue-toast-border-dark: #374151;
-  --vue-toast-shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-  
+  --vue-toast-shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.2);
+
   /* Toast types - Enhanced Colors */
   --vue-toast-success: #16a34a;
   --vue-toast-success-bg: #dcfce7;
@@ -26,14 +28,15 @@
   --vue-toast-info-bg: #eff6ff;
   --vue-toast-info-border: #dbeafe;
   --vue-toast-default: #6b7280;
-  
+
   /* Spacing */
   --vue-toast-padding: 16px;
   --vue-toast-radius: 8px;
   --vue-toast-gap: 8px;
-  
+
   /* Typography */
-  --vue-toast-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --vue-toast-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   --vue-toast-font-size: 14px;
   --vue-toast-font-weight: 400;
   --vue-toast-title-font-weight: 600;
@@ -477,9 +480,17 @@
 
   .vue-toast {
     min-width: auto;
-    max-width: none;
-    width: 100%;
+    max-width: 100% !important; /* Ensure it doesn't overflow */
+    width: 100% !important; /* Full width on small screens */
+    padding: 12px; /* Adjust padding for smaller screens */
+    font-size: 13px; /* Adjust font size for better readability */
+    box-sizing: border-box; /* Prevent overflow */
   }
+}
+
+.vue-toast__icon {
+  width: 18px;
+  height: 18px;
 }
 
 /* List transition styles */

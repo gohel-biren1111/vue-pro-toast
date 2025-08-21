@@ -9,18 +9,9 @@
   >
     <!-- Icon -->
     <div v-if="hasIcon" class="vue-toast__icon">
-      <component
-        v-if="toast.icon.component"
-        :is="toast.icon.component"
-      />
-      <div
-        v-else-if="toast.icon.html"
-        v-html="toast.icon.html"
-      />
-      <div
-        v-else
-        :class="defaultIconClass"
-      />
+      <component v-if="toast.icon.component" :is="toast.icon.component" />
+      <div v-else-if="toast.icon.html" v-html="toast.icon.html" />
+      <div v-else :class="defaultIconClass" />
     </div>
 
     <!-- Content -->
@@ -40,7 +31,14 @@
       @click.stop="handleClose"
       aria-label="Close toast"
     >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
@@ -56,11 +54,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
-import type { Toast } from '../types';
-import { GestureHandler, type SwipeData } from '../utils/gestures';
-import { getAnimationClasses } from '../utils/animations';
-import { pauseToast, resumeToast } from '../composables/useToast';
+import { computed, ref, onMounted, onUnmounted, watch } from "vue";
+import type { Toast } from "../types";
+import { GestureHandler, type SwipeData } from "../utils/gestures";
+import { getAnimationClasses } from "../utils/animations";
+import { pauseToast, resumeToast } from "../composables/useToast";
 
 interface Props {
   toast: Toast;
@@ -68,7 +66,7 @@ interface Props {
 }
 
 interface Emits {
-  (e: 'dismiss', id: string): void;
+  (e: "dismiss", id: string): void;
 }
 
 const props = defineProps<Props>();
@@ -87,49 +85,56 @@ const pausedAt = ref<number>();
 // Computed properties
 const toastClasses = computed(() => {
   return [
-    'vue-toast',
+    "vue-toast",
     `vue-toast--${props.toast.type}`,
     `vue-toast--${props.toast.theme}`,
     `vue-toast--${props.toast.position}`,
     {
-      'vue-toast--dragging': isDragging.value,
-      'vue-toast--closable': props.toast.closable,
-      [props.toast.className]: props.toast.className
+      "vue-toast--dragging": isDragging.value,
+      "vue-toast--closable": props.toast.closable,
+      [props.toast.className]: props.toast.className,
     },
-    getAnimationClasses(props.toast.animation, isVisible.value)
+    getAnimationClasses(props.toast.animation, isVisible.value),
   ];
 });
 
 const toastStyles = computed(() => {
   const styles: Record<string, string> = {
-    ...props.toast.style
+    ...props.toast.style,
   };
 
   if (isDragging.value) {
     styles.transform = `translateX(${dragOffset.value}px)`;
-    styles.opacity = Math.max(0.3, 1 - Math.abs(dragOffset.value) / 200).toString();
+    styles.opacity = Math.max(
+      0.3,
+      1 - Math.abs(dragOffset.value) / 200
+    ).toString();
   }
 
   return styles;
 });
 
 const hasIcon = computed(() => {
-  return props.toast.icon.component || props.toast.icon.html || props.toast.type !== 'default';
+  return (
+    props.toast.icon.component ||
+    props.toast.icon.html ||
+    props.toast.type !== "default"
+  );
 });
 
 const defaultIconClass = computed(() => {
   const iconClasses = {
-    success: 'vue-toast__icon--success',
-    error: 'vue-toast__icon--error',
-    warning: 'vue-toast__icon--warning',
-    info: 'vue-toast__icon--info',
-    default: 'vue-toast__icon--default'
+    success: "vue-toast__icon--success",
+    error: "vue-toast__icon--error",
+    warning: "vue-toast__icon--warning",
+    info: "vue-toast__icon--info",
+    default: "vue-toast__icon--default",
   };
-  
+
   return [
-    'vue-toast__icon--default',
+    "vue-toast__icon--default",
     iconClasses[props.toast.type],
-    props.toast.icon.class
+    props.toast.icon.class,
   ].filter(Boolean);
 });
 
@@ -140,7 +145,7 @@ const showProgress = computed(() => {
 const progressStyle = computed(() => {
   return {
     width: `${progressWidth.value}%`,
-    transition: isDragging.value ? 'none' : undefined
+    transition: isDragging.value ? "none" : undefined,
   };
 });
 
@@ -172,7 +177,7 @@ function handleMouseLeave(): void {
 function dismissToast(): void {
   isVisible.value = false;
   setTimeout(() => {
-    emit('dismiss', props.toast.id);
+    emit("dismiss", props.toast.id);
     props.onDismiss(props.toast.id);
   }, 300); // Animation duration
 }
@@ -181,16 +186,16 @@ function startProgressAnimation(): void {
   if (props.toast.duration <= 0) return;
 
   stopProgressAnimation();
-  
+
   const startTime = Date.now();
   const duration = props.toast.duration;
   remainingTime.value = duration;
-  
+
   progressInterval.value = window.setInterval(() => {
     const elapsed = Date.now() - startTime;
     remainingTime.value = Math.max(0, duration - elapsed);
     progressWidth.value = (remainingTime.value / duration) * 100;
-    
+
     if (remainingTime.value === 0) {
       stopProgressAnimation();
     }
@@ -207,19 +212,19 @@ function pauseProgressAnimation(): void {
 
 function resumeProgressAnimation(): void {
   if (props.toast.duration <= 0 || !remainingTime.value) return;
-  
+
   if (progressInterval.value) {
     clearInterval(progressInterval.value);
   }
 
   const startTime = Date.now();
   const duration = remainingTime.value; // Continue with remaining time
-  
+
   progressInterval.value = window.setInterval(() => {
     const elapsed = Date.now() - startTime;
     remainingTime.value = Math.max(0, duration - elapsed);
     progressWidth.value = (remainingTime.value / props.toast.duration) * 100;
-    
+
     if (remainingTime.value === 0) {
       stopProgressAnimation();
     }
@@ -239,7 +244,7 @@ function setupGestures(): void {
 
   gestureHandler.value = new GestureHandler(toastRef.value, {
     threshold: 80,
-    velocityThreshold: 0.5
+    velocityThreshold: 0.5,
   });
 
   if (props.toast.swipeable || props.toast.draggable) {
@@ -252,7 +257,7 @@ function setupGestures(): void {
 
     gestureHandler.value.onDragEndGesture((data: SwipeData) => {
       isDragging.value = false;
-      
+
       // Check if should dismiss based on drag distance or velocity
       if (Math.abs(data.deltaX) > 120 || Math.abs(data.velocity) > 0.5) {
         dismissToast();
@@ -264,7 +269,7 @@ function setupGestures(): void {
 
     if (props.toast.swipeable) {
       gestureHandler.value.onSwipeGesture((data: SwipeData) => {
-        if (data.direction === 'left' || data.direction === 'right') {
+        if (data.direction === "left" || data.direction === "right") {
           dismissToast();
         }
       });
@@ -284,7 +289,10 @@ onUnmounted(() => {
 });
 
 // Watchers
-watch(() => props.toast.duration, () => {
-  startProgressAnimation();
-});
+watch(
+  () => props.toast.duration,
+  () => {
+    startProgressAnimation();
+  }
+);
 </script>

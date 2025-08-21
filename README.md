@@ -1,20 +1,30 @@
-<!-- # 🍞 Vue Pro Toast
+# 🎁 Vue Pro Toast
 
-**The Most Advanced Vue.js Toast Notification Library** - Built for modern applications with unique features no other package offers!
+**The Most Basic to Advanced Vue.js Toast Notification Library** - Built for modern applications with unique features no other package offers!
 
-![npm](https://img.shields.io/npm/v/vue-pro-toast) ![npm downloads](https://img.shields.io/npm/dw/vue-pro-toast) ![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue) ![Vue 3](https://img.shields.io/badge/Vue-3.x-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue) ![Vue 3](https://img.shields.io/badge/Vue-3.x-green)
 
 ## ✨ Why Vue Pro Toast?
 
 🔊 **Sound Effects** - First toast library with built-in audio feedback  
 ⌨️ **Keyboard Navigation** - Full accessibility with ESC and arrow keys  
+🎨 **Perfect Themes** - Professional light/dark/auto themes  
 📊 **Analytics Built-in** - Track user interactions out of the box  
 🎯 **Promise Integration** - Revolutionary promise-based API  
 🔄 **Smart Queue Management** - Priority-based queuing system  
-🎨 **Perfect Themes** - Professional light/dark/auto themes  
 🚀 **25+ Advanced Features** - More features than any competitor
 
 ---
+
+## 🚀 Live Demo
+
+<!-- - 🚀 **[Demo](https://pro-toast-demo-uo7a.vercel.app/)** -->
+
+- **Coming Soon...**
+
+## 🚀 Documentation
+
+- **Coming Soon...**
 
 ## 🚀 Quick Start
 
@@ -357,17 +367,17 @@ show({
 
 ## 🛠️ Development
 
-### Prerequisites
+<!-- ### Prerequisites
 
 - Node.js 16+
 - Vue 3.x
-- TypeScript 4.5+
+- TypeScript 4.5+ -->
 
 ### Setup Development Environment
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/vue-pro-toast.git
+git clone https://github.com/gohel-biren1111/vue-pro-toast.git
 cd vue-pro-toast
 
 # Install dependencies
@@ -427,6 +437,9 @@ npm run test:coverage
 
 ## 🤝 Contributing
 
+At **vue-pro-toast**, we believe in **building with the community**.
+Have an idea, improvement, or feature request? We’re all ears!
+
 We welcome contributions! Please follow these steps:
 
 ### 1. Fork & Clone
@@ -478,23 +491,11 @@ git push origin feature/amazing-feature
 - **Conventional Commits**: Use conventional commit messages
 - **Tests**: Maintain >90% coverage
 
-### Bug Reports
-
-When reporting bugs, please include:
-
-- Vue version
-- Browser/environment
-- Minimal reproduction code
-- Expected vs actual behavior
-- Console errors (if any)
-
----
-
 ## 📄 License
 
-**MIT License**
+**Under MIT License**
 
-Copyright (c) 2024 Vue Pro Toast
+Copyright (c) 2025 Vue Pro Toast
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -518,31 +519,17 @@ SOFTWARE.
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=your-username/vue-pro-toast&type=Date)](https://star-history.com/#your-username/vue-pro-toast&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=gohel-biren1111/vue-pro-toast&type=Date)](https://star-history.com/#gohel-biren1111/vue-pro-toast&Date)
 
-## 🏆 Awards & Recognition
+<!-- ## 🏆 Awards & Recognition
 
 - 🥇 **Most Innovative Toast Library 2024**
 - 🚀 **50k+ Weekly Downloads**
 - ⭐ **2000+ GitHub Stars**
-- 💎 **Featured in Vue.js News**
-
----
-
-## 🔗 Links
-
-- 📦 [NPM Package](https://www.npmjs.com/package/vue-pro-toast)
-- 📖 [Full Documentation](https://vue-pro-toast.com)
-- 🎮 [Live Demo](https://vue-pro-toast.com/demo)
-- 🐛 [Issue Tracker](https://github.com/your-username/vue-pro-toast/issues)
-- 💬 [Discord Community](https://discord.gg/vue-pro-toast)
-
----
+- 💎 **Featured in Vue.js News** -->
 
 <div align="center">
 
 **Made with ❤️ for the Vue.js community**
 
-[⭐ Star on GitHub](https://github.com/your-username/vue-pro-toast) | [📖 Read Docs](https://vue-pro-toast.com) | [🎮 Try Demo](https://vue-pro-toast.com/demo)
-
-</div> -->
+</div>
