@@ -4,12 +4,25 @@
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue) ![Vue 3](https://img.shields.io/badge/Vue-3.x-green)
 
-<!-- <p align="center">
-  <img src="./Demo.png" alt="Vue Pro Toast" width="800"  />
-</p>
 <p align="center">
-  <img src="./vueProToast.png" alt="Vue Pro Toast" width="800" />
+  <img src="./toastDemo.gif" alt="Vue Pro Toast Demo" width="100%" />
+</p>
+
+<!-- <p align="center">
+  <img src="./vueProToast.png" alt="Vue Pro Toast" width="100%" />
 </p> -->
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="50%">
+        <img src="./soundEffect.png" alt="Vue Pro Toast Sound Effects" width="100%" />
+      </td>
+      <td align="center" width="50%">
+        <img src="./features.png" alt="Vue Pro Toast Features" width="100%" />
+      </td>
+    </tr>
+  </table>
+</p>
 
 ## ✨ Why Vue Pro Toast?
 

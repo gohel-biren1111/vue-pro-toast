@@ -1,17 +1,17 @@
-import { ref, reactive, computed, nextTick } from 'vue';
-import type { 
-  Toast, 
-  ToastOptions, 
-  ToastPosition, 
-  ToastState, 
+import { ref, reactive, computed, nextTick } from "vue";
+import type {
+  Toast,
+  ToastOptions,
+  ToastPosition,
+  ToastState,
   UseToastReturn,
-  ToastContainerOptions 
-} from '../types';
-import { SoundManager } from '../plugins/sound';
-import { KeyboardManager } from '../plugins/keyboard';
-import { AnalyticsManager } from '../plugins/analytics';
-import { QueueManager } from '../plugins/queue';
-import { PromiseManager, type ToastPromise } from '../plugins/promise';
+  ToastContainerOptions,
+} from "../types";
+import { SoundManager } from "../plugins/sound";
+import { KeyboardManager } from "../plugins/keyboard";
+import { AnalyticsManager } from "../plugins/analytics";
+import { QueueManager } from "../plugins/queue";
+import { PromiseManager, type ToastPromise } from "../plugins/promise";
 
 // Plugin instances
 const soundManager = new SoundManager();
@@ -25,14 +25,14 @@ const state = reactive<ToastState>({
   toasts: [],
   containers: new Map(),
   defaultOptions: {
-    position: 'top-right',
-    theme: 'light',
-    animation: 'slide',
+    position: "top-right",
+    theme: "light",
+    animation: "slide",
     maxToasts: 5,
     gap: 8,
     offset: { x: 16, y: 16 },
-    zIndex: 9999
-  }
+    zIndex: 9999,
+  },
 });
 
 // Setup keyboard handlers
@@ -40,15 +40,15 @@ keyboardManager.setDismissAllHandler(() => dismissAll());
 
 // Default toast options
 const defaultToastOptions: Partial<ToastOptions> = {
-  type: 'default',
+  type: "default",
   duration: 4000,
-  position: 'top-right',
-  animation: 'slide',
-  theme: 'light',
+  position: "top-right",
+  animation: "slide",
+  theme: "light",
   closable: true,
   pauseOnHover: true,
   swipeable: true,
-  draggable: true
+  draggable: true,
 };
 
 let toastCounter = 0;
@@ -59,11 +59,11 @@ function generateId(): string {
 
 function createToast(options: ToastOptions): Toast {
   const id = options.id || generateId();
-  
+
   return {
     id,
     type: options.type || defaultToastOptions.type!,
-    title: options.title || '',
+    title: options.title || "",
     message: options.message,
     duration: options.duration ?? defaultToastOptions.duration!,
     position: options.position || defaultToastOptions.position!,
@@ -74,44 +74,44 @@ function createToast(options: ToastOptions): Toast {
     pauseOnHover: options.pauseOnHover ?? defaultToastOptions.pauseOnHover!,
     swipeable: options.swipeable ?? defaultToastOptions.swipeable!,
     draggable: options.draggable ?? defaultToastOptions.draggable!,
-    className: options.className || '',
+    className: options.className || "",
     style: options.style || {},
     onClick: options.onClick || undefined,
     onClose: options.onClose || undefined,
-    createdAt: Date.now()
+    createdAt: Date.now(),
   };
 }
 
 function addToContainer(toast: Toast): void {
   const position = toast.position;
-  
+
   if (!state.containers.has(position)) {
     state.containers.set(position, []);
   }
-  
+
   const container = state.containers.get(position)!;
   const maxToasts = state.defaultOptions.maxToasts!;
-  
+
   // Add toast to container
   container.unshift(toast);
-  
+
   // Remove excess toasts
   if (container.length > maxToasts) {
     const removed = container.splice(maxToasts);
-    removed.forEach(removedToast => {
+    removed.forEach((removedToast) => {
       if (removedToast.timeoutId) {
         clearTimeout(removedToast.timeoutId);
       }
     });
   }
-  
+
   // Update global toasts array
   state.toasts = Array.from(state.containers.values()).flat();
 }
 
 function removeFromContainer(id: string): void {
   for (const [position, container] of state.containers.entries()) {
-    const index = container.findIndex(toast => toast.id === id);
+    const index = container.findIndex((toast) => toast.id === id);
     if (index !== -1) {
       const toast = container[index];
       if (toast.timeoutId) {
@@ -121,7 +121,7 @@ function removeFromContainer(id: string): void {
       break;
     }
   }
-  
+
   // Update global toasts array
   state.toasts = Array.from(state.containers.values()).flat();
 }
@@ -136,29 +136,29 @@ function setAutoClose(toast: Toast): void {
 
 function show(options: ToastOptions): string {
   const toast = createToast(options);
-  
+
   // Play sound
-  if (toast.type !== 'default') {
+  if (toast.type !== "default") {
     soundManager.playSound(toast.type);
   }
-  
+
   // Track analytics
-  analyticsManager.trackEvent(toast.id, toast.type, 'show');
-  
+  analyticsManager.trackEvent(toast.id, toast.type, "show");
+
   addToContainer(toast);
   setAutoClose(toast);
-  
+
   nextTick(() => {
     // Trigger any additional side effects
   });
-  
+
   return toast.id;
 }
 
 function dismiss(id: string): void {
-  const toast = state.toasts.find(t => t.id === id);
+  const toast = state.toasts.find((t) => t.id === id);
   if (toast) {
-    analyticsManager.trackEvent(toast.id, toast.type, 'dismiss');
+    analyticsManager.trackEvent(toast.id, toast.type, "dismiss");
     if (toast.onClose) {
       toast.onClose();
     }
@@ -170,7 +170,7 @@ function dismissAll(position?: ToastPosition): void {
   if (position) {
     const container = state.containers.get(position);
     if (container) {
-      container.forEach(toast => {
+      container.forEach((toast) => {
         if (toast.timeoutId) {
           clearTimeout(toast.timeoutId);
         }
@@ -181,7 +181,7 @@ function dismissAll(position?: ToastPosition): void {
       container.length = 0;
     }
   } else {
-    state.toasts.forEach(toast => {
+    state.toasts.forEach((toast) => {
       if (toast.timeoutId) {
         clearTimeout(toast.timeoutId);
       }
@@ -191,7 +191,7 @@ function dismissAll(position?: ToastPosition): void {
     });
     state.containers.clear();
   }
-  
+
   // Update global toasts array
   state.toasts = Array.from(state.containers.values()).flat();
 }
@@ -201,30 +201,30 @@ function clear(): void {
 }
 
 function update(id: string, options: Partial<ToastOptions>): void {
-  const toast = state.toasts.find(t => t.id === id);
+  const toast = state.toasts.find((t) => t.id === id);
   if (toast) {
     Object.assign(toast, options);
   }
 }
 
 function success(message: string, options: Partial<ToastOptions> = {}): string {
-  return show({ ...options, message, type: 'success' });
+  return show({ ...options, message, type: "success" });
 }
 
 function error(message: string, options: Partial<ToastOptions> = {}): string {
-  return show({ ...options, message, type: 'error' });
+  return show({ ...options, message, type: "error" });
 }
 
 function warning(message: string, options: Partial<ToastOptions> = {}): string {
-  return show({ ...options, message, type: 'warning' });
+  return show({ ...options, message, type: "warning" });
 }
 
 function info(message: string, options: Partial<ToastOptions> = {}): string {
-  return show({ ...options, message, type: 'info' });
+  return show({ ...options, message, type: "info" });
 }
 
 function pauseToast(id: string): void {
-  const toast = state.toasts.find(t => t.id === id);
+  const toast = state.toasts.find((t) => t.id === id);
   if (toast?.timeoutId) {
     clearTimeout(toast.timeoutId);
     toast.timeoutId = undefined;
@@ -232,7 +232,7 @@ function pauseToast(id: string): void {
 }
 
 function resumeToast(id: string): void {
-  const toast = state.toasts.find(t => t.id === id);
+  const toast = state.toasts.find((t) => t.id === id);
   if (toast && !toast.timeoutId && toast.duration > 0) {
     setAutoClose(toast);
   }
@@ -243,16 +243,13 @@ function setDefaults(options: Partial<ToastContainerOptions>): void {
 }
 
 // Advanced promise-based toast
-function promise<T>(
-  promise: Promise<T>,
-  options: ToastPromise<T>
-): Promise<T> {
+function promise<T>(promise: Promise<T>, options: ToastPromise<T>): Promise<T> {
   return promiseManager.handlePromise(promise, options, show, update);
 }
 
 // Batch operations
 function batch(operations: (() => string)[]): string[] {
-  return operations.map(op => op());
+  return operations.map((op) => op());
 }
 
 // Queue operations
@@ -260,7 +257,7 @@ function enqueue(options: ToastOptions, priority = 0): boolean {
   return queueManager.enqueue({
     id: options.id || generateId(),
     priority,
-    data: options
+    data: options,
   });
 }
 
@@ -271,7 +268,7 @@ function getPlugins() {
     keyboard: keyboardManager,
     analytics: analyticsManager,
     queue: queueManager,
-    promise: promiseManager
+    promise: promiseManager,
   };
 }
 
@@ -290,14 +287,9 @@ export function useToast(): UseToastReturn {
     batch,
     enqueue,
     plugins: getPlugins(),
-    toasts: computed(() => state.toasts)
+    toasts: computed(() => state.toasts),
   };
 }
 
 // Export additional utilities
-export {
-  pauseToast,
-  resumeToast,
-  setDefaults,
-  state as toastState
-};
+export { pauseToast, resumeToast, setDefaults, state as toastState };

@@ -1,26 +1,26 @@
-import type { Ref } from 'vue';
+import type { Ref } from "vue";
 
-export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'default';
+export type ToastType = "success" | "error" | "warning" | "info" | "default";
 
-export type ToastPosition = 
-  | 'top-right' 
-  | 'top-left' 
-  | 'top-center' 
-  | 'bottom-right' 
-  | 'bottom-left' 
-  | 'bottom-center' 
-  | 'center';
+export type ToastPosition =
+  | "top-right"
+  | "top-left"
+  | "top-center"
+  | "bottom-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "center";
 
-export type ToastAnimation = 
-  | 'slide' 
-  | 'fade' 
-  | 'bounce' 
-  | 'zoom-in' 
-  | 'zoom-out' 
-  | 'flip' 
-  | 'elastic';
+export type ToastAnimation =
+  | "slide"
+  | "fade"
+  | "bounce"
+  | "zoom-in"
+  | "zoom-out"
+  | "flip"
+  | "elastic";
 
-export type ToastTheme = 'light' | 'dark' | 'auto';
+export type ToastTheme = "light" | "dark" | "auto";
 
 export interface ToastIcon {
   component?: any;
@@ -48,7 +48,8 @@ export interface ToastOptions {
   onClose?: (() => void) | undefined;
 }
 
-export interface Toast extends Required<Omit<ToastOptions, 'id' | 'onClick' | 'onClose'>> {
+export interface Toast
+  extends Required<Omit<ToastOptions, "id" | "onClick" | "onClose">> {
   id: string;
   createdAt: number;
   timeoutId?: number;
