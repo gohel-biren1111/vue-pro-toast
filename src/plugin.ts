@@ -7,24 +7,16 @@ export interface ToastPluginOptions extends ToastContainerOptions {
   containerComponent?: string;
 }
 
-export default {
+// **Default export for plugin**
+const VueProToast = {
   install(app: App, options: ToastPluginOptions = {}) {
-    // Set default options
-    if (options) {
-      setDefaults(options);
-    }
-
-    // Register global component
+    if (options) setDefaults(options);
     const componentName = options.containerComponent || "ToastContainer";
     app.component(componentName, ToastContainer);
-
-    // Provide useToast
     const toast = useToast();
     app.config.globalProperties.$toast = toast;
     app.provide("toast", toast);
-
-    // **Remove automatic CSS injection**
-    // CSS should be imported by consumer project:
-    // import 'vue-pro-toast/vue-pro-toast.css'
   },
 };
+
+export default VueProToast;
