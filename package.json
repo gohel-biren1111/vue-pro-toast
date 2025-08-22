@@ -1,6 +1,6 @@
 {
   "name": "vue-pro-toast",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A feature-complete Vue 3 toast notification package with basic to advanced features, TypeScript support, and modern design.",
   "type": "module",
   "main": "dist/index.umd.js",
@@ -11,7 +11,7 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     },
-    "./style.css": "./dist/style.css"
+    "./vue-pro-toast.css": "./dist/vue-pro-toast.css"
   },
   "files": [
     "dist"
