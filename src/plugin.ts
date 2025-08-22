@@ -7,7 +7,6 @@ export interface ToastPluginOptions extends ToastContainerOptions {
   containerComponent?: string;
 }
 
-// **Default export for plugin**
 const VueProToast = {
   install(app: App, options: ToastPluginOptions = {}) {
     if (options) setDefaults(options);
